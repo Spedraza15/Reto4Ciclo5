@@ -8,10 +8,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class User Service
+ */
+
 @Service
 public class UserService {
+    /**
+     *
+     */
     @Autowired
     private UserRepository userRepository;
+    /**
+     * Get = List of All Users
+     * @return
+     */
 
     public List<User> getAll() {
         return userRepository.getAll();
@@ -20,6 +31,12 @@ public class UserService {
     public Optional<User> getUser(int id) {
         return userRepository.getUser(id);
     }
+
+    /**
+     * Get = User by its id
+     * @param
+     * @return
+     */
 
     public User save(User user) {
         if (user.getId() == null) {
@@ -37,6 +54,11 @@ public class UserService {
             }
         }
     }
+    /**
+     * This method updates a user
+     * @param user
+     * @return
+     */
 
     public User update(User user) {
         if (user.getId() != null) {
@@ -83,9 +105,21 @@ public class UserService {
         return user;
     }
 
+    /**
+     * This method checks if an email exists
+     * @param email
+     * @return
+     */
+
     public boolean emailExists(String email) {
         return userRepository.emailExists(email);
     }
+
+    /**
+     * This method deletes a User
+     * @param userId
+     * @return
+     */
 
     public boolean delete(int userId) {
         Boolean userBoolean = getUser(userId).map(user -> {
@@ -94,6 +128,12 @@ public class UserService {
         }).orElse(false);
         return userBoolean;
     }
+    /**
+     * This method verifies if a user is registered by its email and password
+     * @param email
+     * @param password
+     * @return
+     */
 
     public User authenticateUser(String email, String password){
         Optional<User> user = userRepository.authenticateUser(email, password);
